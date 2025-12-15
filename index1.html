@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zigguratss | Premium Art Gallery</title>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ====== ADVANCED ANIMATION SYSTEM ====== */
+        :root {
+            /* Premium Color Palette */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-tertiary: #888888;
+            --accent-gold: #d4af37;
+            --accent-silver: #c0c0c0;
+            --border-dark: #333333;
+            --border-light: #444444;
+            
+            /* Typography */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 32px;
+            --space-lg: 48px;
+            --space-xl: 64px;
+            --space-xxl: 96px;
+            
+            /* Card Dimensions */
+            --card-width: 380px;
+            --card-height: 480px;
+            --image-height: 280px;
+            
+            /* Animation Timings */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--text-secondary);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* ====== ANIMATION KEYFRAMES ====== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes rotate3D {
+            0% { transform: perspective(1000px) rotateY(0deg); }
+            100% { transform: perspective(1000px) rotateY(360deg); }
+        }
+        
+        /* ====== MAIN CONTAINER ====== */
+        .art-gallery {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-md);
+            position: relative;
+        }
+        
+        /* Animated Background Elements */
+        .background-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: float 4s infinite ease-in-out;
+        }
+        
+        .floating-dot:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-dot:nth-child(2) { top: 40%; right: 15%; animation-delay: 0.5s; }
+        .floating-dot:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 1s; }
+        
+        /* ====== SECTION HEADER ====== */
+        .gallery-header {
+            text-align: center;
+            margin-bottom: var(--space-xxl);
+            position: relative;
+        }
+        
+        .header-subtitle {
+            font-size: 14px;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+            display: inline-block;
+            position: relative;
+            padding: 0 var(--space-sm);
+        }
+        
+        .header-subtitle::before,
+        .header-subtitle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold));
+        }
+        
+        .header-subtitle::before {
+            right: 100%;
+        }
+        
+        .header-subtitle::after {
+            left: 100%;
+            background: linear-gradient(90deg, var(--accent-gold), transparent);
+        }
+        
+        .header-title {
+            font-family: var(--font-heading);
+            font-size: 56px;
+            font-weight: 300;
+            background: linear-gradient(45deg, var(--text-primary), var(--accent-silver));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: var(--space-md);
+            position: relative;
+        }
+        
+        .header-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+        }
+        
+        /* ====== ARTWORK GRID WITH ADVANCED ANIMATIONS ====== */
+        .artwork-grid-container {
+            position: relative;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .artwork-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
+            gap: var(--space-lg);
+            perspective: 1000px;
+        }
+        
+        /* ARTWORK CARD - Enhanced with 3D effects */
+        .artwork-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: var(--card-height);
+            transition: all 0.6s var(--transition-smooth);
+            border: 1px solid var(--border-dark);
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            will-change: transform, box-shadow;
+        }
+        
+        .artwork-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .artwork-card:hover {
+            transform: translateY(-12px) translateZ(20px);
+            border-color: var(--accent-gold);
+            animation: glow 2s infinite;
+        }
+        
+        .artwork-card:hover::before {
+            opacity: 1;
+        }
+        
+        .artwork-card:hover .card-image {
+            transform: scale(1.1) rotate(1deg);
+        }
+        
+        .artwork-card:hover .card-number {
+            transform: scale(1.2);
+            color: var(--accent-gold);
+        }
+        
+        /* IMAGE CONTAINER with Parallax Effect */
+        .card-image-container {
+            height: var(--image-height);
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(45deg, #222, #333);
+        }
+        
+        .card-image-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--transition-smooth);
+            filter: brightness(0.9) contrast(1.1);
+        }
+        
+        /* CARD NUMBER with Animation */
+        .card-number {
+            position: absolute;
+            top: var(--space-sm);
+            left: var(--space-sm);
+            font-family: var(--font-heading);
+            font-size: 64px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.1);
+            z-index: 2;
+            transition: all 0.4s var(--transition-smooth);
+            line-height: 1;
+        }
+        
+        /* CARD CONTENT with Staggered Animations */
+        .card-content {
+            padding: var(--space-md);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card-category {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            font-weight: 500;
+            display: inline-block;
+            position: relative;
+            padding-left: var(--space-sm);
+        }
+        
+        .card-category::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            animation: pulse 2s infinite;
+        }
+        
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            line-height: 1.3;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: width 0.6s var(--transition-smooth);
+        }
+        
+        .artwork-card:hover .card-title::after {
+            width: 100%;
+        }
+        
+        .card-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-md);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* EXTENDED CONTENT with Slide Animation */
+        .card-extended {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.6s var(--transition-smooth);
+        }
+        
+        .card-extended.expanded {
+            max-height: 300px;
+            opacity: 1;
+            transform: translateY(0);
+            margin-bottom: var(--space-md);
+            animation: slideIn 0.5s var(--transition-smooth);
+        }
+        
+        .extended-content {
+            padding: var(--space-sm) 0;
+            border-top: 1px solid var(--border-dark);
+            animation: scaleIn 0.3s var(--transition-smooth);
+        }
+        
+        /* ARTWORK DETAILS with Grid Animation */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-xs);
+            margin-top: var(--space-sm);
+        }
+        
+        .detail-item {
+            opacity: 0;
+            transform: translateX(-10px);
+            animation: slideIn 0.3s var(--transition-smooth) forwards;
+        }
+        
+        .detail-item:nth-child(1) { animation-delay: 0.1s; }
+        .detail-item:nth-child(2) { animation-delay: 0.2s; }
+        .detail-item:nth-child(3) { animation-delay: 0.3s; }
+        .detail-item:nth-child(4) { animation-delay: 0.4s; }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+        
+        /* CARD FOOTER with Animated Button */
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        .card-price {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            position: relative;
+        }
+        
+        .card-price::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            width: 2px;
+            height: 0;
+            background: var(--accent-gold);
+            transition: height 0.3s ease;
+        }
+        
+        .artwork-card:hover .card-price::before {
+            height: 20px;
+        }
+        
+        /* VIEW DETAILS BUTTON with Hover Effects */
+        .view-details-btn {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.4s var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .view-details-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+        
+        .view-details-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            padding-right: 25px;
+            padding-left: 15px;
+        }
+        
+        .view-details-btn:hover::before {
+            left: 100%;
+        }
+        
+        .view-details-btn:hover .btn-icon {
+            transform: translateX(5px);
+        }
+        
+        .btn-icon {
+            transition: transform 0.3s var(--transition-smooth);
+            font-size: 10px;
+        }
+        
+        .view-details-btn.expanded .btn-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* LOAD MORE BUTTON with Advanced Animation */
+        .load-more-container {
+            text-align: center;
+            margin-top: var(--space-xxl);
+            position: relative;
+        }
+        
+        .load-more-btn {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #b8941f 100%);
+            color: var(--text-primary);
+            border: none;
+            padding: 18px 50px;
+            border-radius: 30px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.4s var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        .load-more-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .load-more-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+            animation-play-state: paused;
+        }
+        
+        .load-more-btn:hover::before {
+            left: 100%;
+        }
+        
+        .load-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .load-more-btn.loading .load-icon {
+            animation: rotate3D 1s linear infinite;
+        }
+        
+        /* HIDDEN ARTWORKS with Reveal Animation */
+        .hidden-artworks {
+            display: none;
+        }
+        
+        .hidden-artworks.visible {
+            display: grid;
+            animation: scaleIn 0.5s var(--transition-smooth);
+        }
+        
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: fixed;
+            right: var(--space-md);
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .scroll-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--border-light);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .scroll-dot.active {
+            background: var(--accent-gold);
+            transform: scale(1.5);
+        }
+        
+        /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 1200px) {
+            .artwork-grid {
+                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            }
+            
+            .header-title {
+                font-size: 48px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .art-gallery {
+                padding: var(--space-lg) var(--space-sm);
+            }
+            
+            .header-title {
+                font-size: 36px;
+            }
+            
+            .artwork-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: var(--space-md);
+            }
+            
+            .artwork-card {
+                --card-height: 440px;
+                --image-height: 240px;
+            }
+            
+            .card-number {
+                font-size: 48px;
+            }
+            
+            .scroll-indicator {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .artwork-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-title {
+                font-size: 32px;
+            }
+            
+            .header-subtitle {
+                font-size: 12px;
+            }
+            
+            .load-more-btn {
+                padding: 15px 35px;
+                font-size: 14px;
+            }
+        }
+        
+        /* Animation for page load */
+        @keyframes pageLoad {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        body {
+            animation: pageLoad 1s var(--transition-smooth);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="background-elements">
+        <div class="floating-dot"></div>
+        <div class="floating-dot"></div>
+        <div class="floating-dot"></div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-dot active" data-section="0"></div>
+        <div class="scroll-dot" data-section="1"></div>
+        <div class="scroll-dot" data-section="2"></div>
+    </div>
+    
+    <!-- ====== ART GALLERY ====== -->
+    <main class="art-gallery">
+        
+        <!-- Gallery Header -->
+        <header class="gallery-header" data-aos="fade-down" data-aos-delay="200">
+            <div class="header-subtitle">Premium Collection</div>
+            <h1 class="header-title">Timeless Masterpieces</h1>
+            <p style="color: var(--text-tertiary); max-width: 600px; margin: 0 auto; font-size: 18px;">
+                Experience art in motion. Each piece comes alive with multiple animations and interactive effects.
+            </p>
+        </header>
+        
+        <!-- Initial Artworks Grid -->
+        <div class="artwork-grid-container">
+            <div class="artwork-grid" id="artworks-grid">
+                
+                <!-- Artwork 1 -->
+                <article class="artwork-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="card-number">01</div>
+                    <div class="card-image-container">
+                        <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Abstract Expressionism" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <p class="card-category">Abstract Expressionism</p>
+                        <h3 class="card-title">Vibrant Harmony</h3>
+                        <p class="card-description">Bold colors dance across the canvas in this emotional masterpiece.</p>
+                        
+                        <div class="card-extended" id="extended-1">
+                            <div class="extended-content">
+                                <p>An exploration of color theory and emotional resonance through bold brushwork.</p>
+                                <div class="details-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium:</span> Acrylic & Gold Leaf
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Size:</span> 48" × 36"
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year:</span> 2023
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Status:</span> Available
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-price">$4,200</div>
+                            <button class="view-details-btn" data-target="extended-1">
+                                Explore
+                                <span class="btn-icon">↗</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Artwork 2 -->
+                <article class="artwork-card" data-aos="flip-right" data-aos-delay="150">
+                    <div class="card-number">02</div>
+                    <div class="card-image-container">
+                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Mountain Landscape" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <p class="card-category">Landscape Masterpiece</p>
+                        <h3 class="card-title">Alpine Serenity</h3>
+                        <p class="card-description">Majestic mountains captured at golden hour with incredible detail.</p>
+                        
+                        <div class="card-extended" id="extended-2">
+                            <div class="extended-content">
+                                <p>Oil painting created during an alpine expedition with natural light studies.</p>
+                                <div class="details-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium:</span> Oil on Canvas
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Size:</span> 60" × 40"
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year:</span> 2022
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Status:</span> Reserved
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-price">$5,800</div>
+                            <button class="view-details-btn" data-target="extended-2">
+                                Explore
+                                <span class="btn-icon">↗</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Artwork 3 -->
+                <article class="artwork-card" data-aos="flip-up" data-aos-delay="200">
+                    <div class="card-number">03</div>
+                    <div class="card-image-container">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Portrait Painting" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <p class="card-category">Contemporary Portrait</p>
+                        <h3 class="card-title">Silent Contemplation</h3>
+                        <p class="card-description">A psychological study of human emotion through portraiture.</p>
+                        
+                        <div class="card-extended" id="extended-3">
+                            <div class="extended-content">
+                                <p>Winner of 2023 Contemporary Portraiture Award with psychological depth.</p>
+                                <div class="details-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium:</span> Oil & Charcoal
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Size:</span> 40" × 30"
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year:</span> 2023
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Status:</span> Sold
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-price">$3,900</div>
+                            <button class="view-details-btn" data-target="extended-3">
+                                Explore
+                                <span class="btn-icon">↗</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Artwork 4 -->
+                <article class="artwork-card" data-aos="flip-down" data-aos-delay="250">
+                    <div class="card-number">04</div>
+                    <div class="card-image-container">
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Modern Sculpture" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <p class="card-category">Sculpture Art</p>
+                        <h3 class="card-title">Form & Void</h3>
+                        <p class="card-description">Minimalist sculpture exploring negative space and balance.</p>
+                        
+                        <div class="card-extended" id="extended-4">
+                            <div class="extended-content">
+                                <p>Marble sculpture combining traditional carving with modern design principles.</p>
+                                <div class="details-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium:</span> Carrara Marble
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Size:</span> 24" × 18" × 12"
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year:</span> 2024
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Status:</span> Limited
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-price">$6,500</div>
+                            <button class="view-details-btn" data-target="extended-4">
+                                Explore
+                                <span class="btn-icon">↗</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Artwork 5 -->
+                <article class="artwork-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="card-number">05</div>
+                    <div class="card-image-container">
+                        <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Digital Art" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <p class="card-category">Digital Masterpiece</p>
+                        <h3 class="card-title">Digital Frontier</h3>
+                        <p class="card-description">Interactive digital art with augmented reality integration.</p>
+                        
+                        <div class="card-extended" id="extended-5">
+                            <div class="extended-content">
+                                <p>Generative art created with custom algorithms and interactive elements.</p>
+                                <div class="details-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium:</span> Digital Print with AR
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Size:</span> 36" × 24"
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year:</span> 2024
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Status:</span> Available
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-price">$2,400</div>
+                            <button class="view-details-btn" data-target="extended-5">
+                                Explore
+                                <span class="btn-icon">↗</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Artwork 6 -->
+                <article class="artwork-card" data-aos="zoom-out" data-aos-delay="350">
+                    <div class="card-number">06</div>
+                    <div class="card-image-container">
+                        <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Textile Art" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <p class="card-category">Textile Art</p>
+                        <h3 class="card-title">Woven Stories</h3>
+                        <p class="card-description">Traditional textile techniques meet contemporary design.</p>
+                        
+                        <div class="card-extended" id="extended-6">
+                            <div class="extended-content">
+                                <p>Hand-woven textile using natural fibers and traditional dyeing methods.</p>
+                                <div class="details-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium:</span> Mixed Fibers
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Size:</span> 60" × 40"
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year:</span> 2023
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Status:</span> Available
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-price">$3,200</div>
+                            <button class="view-details-btn" data-target="extended-6">
+                                Explore
+                                <span class="btn-icon">↗</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                
+            </div>
+        </div>
+        
+        <!-- Hidden Additional Artworks -->
+        <div class="hidden-artworks" id="hidden-artworks">
+            <!-- Additional artworks will be dynamically loaded here -->
+        </div>
+        
+        <!-- Load More Button -->
+        <div class="load-more-container" data-aos="fade-up" data-aos-delay="400">
+            <button class="load-more-btn" id="load-more-btn">
+                <span class="load-icon">↻</span>
+                Load More Masterpieces
+            </button>
+        </div>
+    </main>
+
+    <!-- ====== ADVANCED ANIMATION SCRIPTS ====== -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS with custom settings
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: false,
+            mirror: true,
+            offset: 100,
+            delay: 0,
+            anchorPlacement: 'top-bottom',
+            disable: 'mobile'
+        });
+        
+        // Advanced Animation Functions
+        const animationManager = {
+            init() {
+                this.setupEventListeners();
+                this.setupScrollIndicator();
+                this.setupMouseFollow();
+                this.preloadImages();
+                setTimeout(() => AOS.refresh(), 500);
+            },
+            
+            setupEventListeners() {
+                // Details button functionality
+                document.querySelectorAll('.view-details-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.toggleDetails(e));
+                });
+                
+                // Load more button
+                const loadBtn = document.getElementById('load-more-btn');
+                if (loadBtn) {
+                    loadBtn.addEventListener('click', () => this.loadMoreArtworks());
+                }
+                
+                // Mouse move effects
+                document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+                
+                // Scroll events
+                window.addEventListener('scroll', () => this.handleScroll());
+            },
+            
+            setupScrollIndicator() {
+                const dots = document.querySelectorAll('.scroll-dot');
+                const sections = document.querySelectorAll('.artwork-card');
+                
+                dots.forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        const sectionIndex = parseInt(e.target.dataset.section);
+                        const targetSection = sections[sectionIndex];
+                        if (targetSection) {
+                            targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    });
+                });
+            },
+            
+            setupMouseFollow() {
+                // Add mouse follow effect to cards
+                document.querySelectorAll('.artwork-card').forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        
+                        const rotateY = ((x - centerX) / centerX) * 5;
+                        const rotateX = ((centerY - y) / centerY) * 5;
+                        
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+                    });
+                });
+            },
+            
+            preloadImages() {
+                // Preload images for smooth loading
+                const images = document.querySelectorAll('.card-image');
+                images.forEach(img => {
+                    const tempImg = new Image();
+                    tempImg.src = img.src;
+                });
+            },
+            
+            toggleDetails(e) {
+                const button = e.currentTarget;
+                const targetId = button.dataset.target;
+                const targetElement = document.getElementById(targetId);
+                const isExpanded = targetElement.classList.contains('expanded');
+                
+                // Close other expanded sections
+                document.querySelectorAll('.card-extended.expanded').forEach(expanded => {
+                    if (expanded.id !== targetId) {
+                        expanded.classList.remove('expanded');
+                        const otherBtn = document.querySelector(`[data-target="${expanded.id}"]`);
+                        if (otherBtn) {
+                            otherBtn.classList.remove('expanded');
+                            otherBtn.innerHTML = 'Explore <span class="btn-icon">↗</span>';
+                        }
+                    }
+                });
+                
+                // Toggle current section
+                if (isExpanded) {
+                    targetElement.classList.remove('expanded');
+                    button.classList.remove('expanded');
+                    button.innerHTML = 'Explore <span class="btn-icon">↗</span>';
+                } else {
+                    targetElement.classList.add('expanded');
+                    button.classList.add('expanded');
+                    button.innerHTML = 'Collapse <span class="btn-icon">↗</span>';
+                    
+                    // Animate details in
+                    const detailItems = targetElement.querySelectorAll('.detail-item');
+                    detailItems.forEach((item, index) => {
+                        item.style.animationDelay = `${index * 0.1}s`;
+                    });
+                }
+                
+                setTimeout(() => AOS.refresh(), 300);
+            },
+            
+            loadMoreArtworks() {
+                const loadBtn = document.getElementById('load-more-btn');
+                const hiddenContainer = document.getElementById('hidden-artworks');
+                
+                loadBtn.classList.add('loading');
+                loadBtn.disabled = true;
+                
+                // Simulate loading delay
+                setTimeout(() => {
+                    // Create additional artwork cards
+                    const additionalArtworks = [
+                        {
+                            id: 7,
+                            category: "Watercolor",
+                            title: "Coastal Dreams",
+                            description: "Delicate watercolor studies of coastal landscapes with ethereal light.",
+                            price: "$1,800",
+                            image: "https://images.unsplash.com/photo-1543857778-c4a1a569e388?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        },
+                        {
+                            id: 8,
+                            category: "Photography",
+                            title: "Urban Geometry",
+                            description: "Architectural photography exploring geometric patterns in cities.",
+                            price: "$1,200",
+                            image: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        },
+                        {
+                            id: 9,
+                            category: "Ceramics",
+                            title: "Earth & Fire",
+                            description: "Organic ceramic forms inspired by natural elements.",
+                            price: "$2,100",
+                            image: "https://images.unsplash.com/photo-1580137189272-c9379f8864fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        }
+                    ];
+                    
+                    // Add to grid with animations
+                    additionalArtworks.forEach((artwork, index) => {
+                        const card = this.createArtworkCard(artwork, index);
+                        document.getElementById('artworks-grid').appendChild(card);
+                        
+                        // Add animation
+                        setTimeout(() => {
+                            card.style.animation = 'scaleIn 0.6s ease forwards';
+                        }, index * 100);
+                    });
+                    
+                    // Update button
+                    loadBtn.classList.remove('loading');
+                    loadBtn.innerHTML = '<span class="load-icon">✓</span> All Masterpieces Loaded';
+                    loadBtn.style.animation = 'none';
+                    
+                    // Refresh animations
+                    setTimeout(() => {
+                        AOS.refresh();
+                        
+                        // Reinitialize mouse follow for new cards
+                        this.setupMouseFollow();
+                    }, 500);
+                    
+                }, 1200);
+            },
+            
+            createArtworkCard(artwork, index) {
+                const card = document.createElement('article');
+                card.className = 'artwork-card';
+                card.setAttribute('data-aos', 'fade-up');
+                card.setAttribute('data-aos-delay', (index + 7) * 50);
+                
+                card.innerHTML = `
+                    <div class="card-number">0${artwork.id}</div>
+                    <div class="card-image-container">
+                        <img src="${artwork.image}" alt="${artwork.category}" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <p class="card-category">${artwork.category}</p>
+                        <h3 class="card-title">${artwork.title}</h3>
+                        <p class="card-description">${artwork.description}</p>
+                        
+                        <div class="card-extended" id="extended-${artwork.id}">
+                            <div class="extended-content">
+                                <p>Premium quality artwork with certificate of authenticity included.</p>
+                                <div class="details-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium:</span> Premium Materials
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Size:</span> Custom Dimensions
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year:</span> 2024
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Status:</span> Available
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-price">${artwork.price}</div>
+                            <button class="view-details-btn" data-target="extended-${artwork.id}">
+                                Explore
+                                <span class="btn-icon">↗</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                // Add click event to new button
+                const btn = card.querySelector('.view-details-btn');
+                btn.addEventListener('click', (e) => this.toggleDetails(e));
+                
+                return card;
+            },
+            
+            handleMouseMove(e) {
+                // Parallax effect for cards
+                const cards = document.querySelectorAll('.artwork-card');
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                cards.forEach((card, index) => {
+                    const speed = 0.1 + (index * 0.02);
+                    const x = (mouseX * speed * 20) - 10;
+                    const y = (mouseY * speed * 20) - 10;
+                    
+                    if (!card.classList.contains('hover')) {
+                        card.style.transform = `translate(${x}px, ${y}px)`;
+                    }
+                });
+            },
+            
+            handleScroll() {
+                // Update scroll indicator
+                const scrollPos = window.scrollY;
+                const sections = document.querySelectorAll('.artwork-card');
+                const dots = document.querySelectorAll('.scroll-dot');
+                
+                sections.forEach((section, index) => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                        dots.forEach(dot => dot.classList.remove('active'));
+                        if (dots[index]) dots[index].classList.add('active');
+                    }
+                });
+                
+                // Trigger animations on scroll
+                AOS.refresh();
+            }
+        };
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            animationManager.init();
+            
+            // Add ripple effect to buttons
+            document.querySelectorAll('button').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(212, 175, 55, 0.3);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        top: ${y}px;
+                        left: ${x}px;
+                        pointer-events: none;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+            
+            // Add CSS for ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+        
+        // Expose animation manager for debugging
+        window.animationManager = animationManager;
+    </script>
+</body>
+</html>
