@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zigguratss Art Gallery | Premium Collection</title>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Premium Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ====== PREMIUM COLOR PALETTE ====== */
+        :root {
+            /* Primary Colors - Sophisticated & Rich */
+            --deep-navy: #0a192f;          /* Dark blue for depth */
+            --art-gold: #d4af37;           /* Rich gold for luxury */
+            --cream-white: #f8f5f0;        /* Warm cream for elegance */
+            --charcoal-gray: #2a2a2a;      /* Deep gray for text */
+            --soft-taupe: #a89f8f;         /* Muted taupe for accents */
+            --art-green: #3a5a40;          /* Deep green for nature */
+            --bronze: #cd7f32;             /* Bronze for warmth */
+            
+            /* Gradient Colors */
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f7ef8a 100%);
+            --gradient-navy: linear-gradient(135deg, #0a192f 0%, #1e3a5f 100%);
+            --gradient-cream: linear-gradient(135deg, #f8f5f0 0%, #fffbf5 100%);
+            
+            /* Text Colors */
+            --text-primary: #2a2a2a;
+            --text-secondary: #5a5a5a;
+            --text-light: #8a8a8a;
+            --text-on-dark: #f0f0f0;
+            
+            /* Spacing System */
+            --space-xxs: 4px;
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 32px;
+            --space-lg: 48px;
+            --space-xl: 64px;
+            --space-xxl: 96px;
+            --space-xxxl: 128px;
+            
+            /* Shadows & Effects */
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --shadow-hard: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --shadow-gold: 0 10px 30px rgba(212, 175, 55, 0.2);
+            
+            /* Borders */
+            --border-light: 1px solid rgba(0, 0, 0, 0.08);
+            --border-medium: 1px solid rgba(0, 0, 0, 0.12);
+            --border-gold: 2px solid var(--art-gold);
+        }
+        
+        /* ====== GLOBAL STYLES ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--gradient-cream);
+            overflow-x: hidden;
+        }
+        
+        /* ====== PREMIUM SECTION STYLES ====== */
+        .premium-gallery {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: var(--space-xxxl) var(--space-lg);
+            position: relative;
+        }
+        
+        /* Decorative Background Elements */
+        .premium-gallery::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 600px;
+            background: var(--gradient-navy);
+            z-index: -1;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+        }
+        
+        /* ====== ENHANCED HEADER ====== */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-xxxl);
+            position: relative;
+            padding: 0 var(--space-md);
+        }
+        
+        .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--art-gold);
+            margin-bottom: var(--space-md);
+            display: inline-block;
+            padding: var(--space-xs) var(--space-md);
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 600;
+            color: var(--cream-white);
+            margin-bottom: var(--space-md);
+            line-height: 1.1;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .title-accent {
+            color: var(--art-gold);
+            font-style: italic;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .title-accent::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.6s ease;
+        }
+        
+        .section-title:hover .title-accent::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .section-description {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 700px;
+            margin: var(--space-lg) auto 0;
+            line-height: 1.8;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+        
+        /* Decorative Line */
+        .decorative-line {
+            width: 120px;
+            height: 3px;
+            background: var(--gradient-gold);
+            margin: var(--space-xl) auto;
+            border-radius: 3px;
+            position: relative;
+        }
+        
+        .decorative-line::before,
+        .decorative-line::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--art-gold);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .decorative-line::before {
+            left: -20px;
+        }
+        
+        .decorative-line::after {
+            right: -20px;
+        }
+        
+        /* ====== PREMIUM GALLERY ITEMS ====== */
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xxl);
+        }
+        
+        .gallery-item {
+            display: flex;
+            min-height: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+            box-shadow: var(--shadow-hard);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Decorative Number */
+        .item-number {
+            position: absolute;
+            top: var(--space-lg);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 7rem;
+            font-weight: 700;
+            color: rgba(212, 175, 55, 0.08);
+            z-index: 1;
+            line-height: 1;
+        }
+        
+        .gallery-item:nth-child(odd) .item-number {
+            left: var(--space-lg);
+        }
+        
+        .gallery-item:nth-child(even) .item-number {
+            right: var(--space-lg);
+            text-align: right;
+        }
+        
+        /* Image Container with Frame Effect */
+        .item-image-container {
+            flex: 0 0 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl);
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, #f9f7f3 0%, #ffffff 100%);
+        }
+        
+        .image-frame {
+            width: 100%;
+            max-width: 650px;
+            height: 450px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            border: 12px solid white;
+            transition: all 0.4s ease;
+        }
+        
+        .gallery-item:hover .image-frame {
+            border-color: var(--cream-white);
+            transform: scale(1.02);
+            box-shadow: var(--shadow-hard), var(--shadow-gold);
+        }
+        
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: var(--gradient-gold);
+            z-index: -1;
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .gallery-item:hover .image-frame::before {
+            opacity: 0.6;
+        }
+        
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+        
+        .gallery-item:hover .image-frame img {
+            transform: scale(1.05);
+        }
+        
+        /* Content Container */
+        .item-content {
+            flex: 0 0 50%;
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Category Badge */
+        .item-category {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--art-gold);
+            margin-bottom: var(--space-md);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: 8px 16px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 30px;
+            width: fit-content;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .item-category i {
+            font-size: 10px;
+        }
+        
+        /* Title with Enhanced Typography */
+        .item-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 600;
+            color: var(--deep-navy);
+            margin-bottom: var(--space-sm);
+            line-height: 1.1;
+            position: relative;
+            padding-bottom: var(--space-md);
+        }
+        
+        .item-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--gradient-gold);
+            border-radius: 3px;
+        }
+        
+        /* Subtitle */
+        .item-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--bronze);
+            margin-bottom: var(--space-lg);
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Description with Better Readability */
+        .item-description {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            position: relative;
+            padding-left: var(--space-md);
+            border-left: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Art Details Grid */
+        .art-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-md);
+            background: rgba(248, 245, 240, 0.6);
+            border-radius: 10px;
+            border: var(--border-light);
+            transition: all 0.3s ease;
+        }
+        
+        .detail-item:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-soft);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        .detail-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--soft-taupe);
+            margin-bottom: 4px;
+        }
+        
+        .detail-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--deep-navy);
+        }
+        
+        /* Premium Action Button */
+        .premium-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            background: var(--gradient-navy);
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            width: fit-content;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.2);
+        }
+        
+        .premium-action::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .premium-action:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(10, 25, 47, 0.3);
+            background: linear-gradient(135deg, #1e3a5f 0%, #0a192f 100%);
+        }
+        
+        .premium-action:hover::before {
+            left: 100%;
+        }
+        
+        .premium-action i {
+            font-size: 14px;
+            transition: transform 0.3s ease;
+        }
+        
+        .premium-action:hover i {
+            transform: translateX(5px);
+        }
+        
+        .premium-action.expanded {
+            background: var(--gradient-gold);
+            color: var(--deep-navy);
+        }
+        
+        /* Extended Content */
+        .item-extended {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.6s ease;
+            margin-bottom: 0;
+        }
+        
+        .item-extended.expanded {
+            max-height: 800px;
+            opacity: 1;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .extended-content {
+            padding-top: var(--space-xl);
+            border-top: var(--border-light);
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Alternate Layout for Even Items */
+        .gallery-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .gallery-item:nth-child(even) .item-content {
+            padding-right: var(--space-xl);
+        }
+        
+        .gallery-item:nth-child(even) .item-title::after {
+            left: auto;
+            right: 0;
+        }
+        
+        /* ====== FOOTER CALL-TO-ACTION ====== */
+        .gallery-footer {
+            text-align: center;
+            margin-top: var(--space-xxxl);
+            padding: var(--space-xxl);
+            background: var(--gradient-navy);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0,50 C30,30 70,70 100,50 L100,100 L0,100 Z" fill="rgba(212, 175, 55, 0.05)"/></svg>');
+            opacity: 0.5;
+        }
+        
+        .footer-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: white;
+            margin-bottom: var(--space-md);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--space-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+        
+        .footer-action {
+            background: var(--gradient-gold);
+            color: var(--deep-navy);
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 1200px) {
+            .section-title {
+                font-size: 3.8rem;
+            }
+            
+            .item-title {
+                font-size: 2.8rem;
+            }
+            
+            .image-frame {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .gallery-item {
+                flex-direction: column;
+                min-height: auto;
+            }
+            
+            .item-image-container,
+            .item-content {
+                flex: 0 0 100%;
+            }
+            
+            .item-number {
+                font-size: 5rem;
+            }
+            
+            .gallery-item:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .gallery-item:nth-child(even) .item-title::after {
+                left: 0;
+                right: auto;
+            }
+            
+            .art-details {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .premium-gallery {
+                padding: var(--space-xxl) var(--space-md);
+            }
+            
+            .section-title {
+                font-size: 3rem;
+            }
+            
+            .item-title {
+                font-size: 2.4rem;
+            }
+            
+            .image-frame {
+                height: 350px;
+                border-width: 8px;
+            }
+            
+            .footer-title {
+                font-size: 2.5rem;
+            }
+            
+            .premium-gallery::before {
+                height: 500px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .item-title {
+                font-size: 2rem;
+            }
+            
+            .premium-action {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .image-frame {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ====== PREMIUM GALLERY SECTION ====== -->
+    <section class="premium-gallery">
+        
+        <!-- Enhanced Header -->
+        <div class="section-header" data-aos="fade-up" data-aos-once="false">
+            <span class="section-subtitle">Exclusive Collection</span>
+            <h1 class="section-title">Curated <span class="title-accent">Masterpieces</span></h1>
+            <div class="decorative-line"></div>
+            <p class="section-description">
+                An extraordinary selection of contemporary and classical artworks from visionary artists around the globe. 
+                Each piece represents the pinnacle of craftsmanship and creative expression.
+            </p>
+        </div>
+        
+        <!-- Gallery Container -->
+        <div class="gallery-container">
+            
+            <!-- Item 1: Image Left, Text Right -->
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false">
+                <div class="item-number">01</div>
+                <div class="item-image-container">
+                    <div class="image-frame">
+                        <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Abstract Expressionism Artwork">
+                    </div>
+                </div>
+                <div class="item-content">
+                    <span class="item-category"><i class="fas fa-palette"></i> Abstract Expressionism</span>
+                    <h2 class="item-title">Chromatic Resonance</h2>
+                    <p class="item-subtitle">A Visual Symphony of Color & Emotion</p>
+                    <p class="item-description">
+                        This groundbreaking work explores the intersection of color theory and emotional expression. 
+                        Through meticulously layered pigments and dynamic brushwork, the artist creates a visual experience 
+                        that transcends traditional artistic boundaries.
+                    </p>
+                    <div class="art-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Artist</span>
+                            <span class="detail-value">Somnath Bothe</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Medium</span>
+                            <span class="detail-value">Acrylic & Gold Leaf</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Dimensions</span>
+                            <span class="detail-value">48" × 36"</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Collection</span>
+                            <span class="detail-value">Modern Masters</span>
+                        </div>
+                    </div>
+                    <button class="premium-action" data-target="extended-1">
+                        <span>Explore This Masterpiece</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </article>
+            
+            <!-- Item 2: Image Right, Text Left -->
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false">
+                <div class="item-number">02</div>
+                <div class="item-content">
+                    <span class="item-category"><i class="fas fa-mountain"></i> Landscape Mastery</span>
+                    <h2 class="item-title">Eternal Peaks</h2>
+                    <p class="item-subtitle">The Majesty of Untouched Wilderness</p>
+                    <p class="item-description">
+                        Capturing the sublime beauty of alpine landscapes at golden hour, this painting transports 
+                        viewers to a world of pristine natural wonder. The artist's mastery of light and atmosphere 
+                        creates a deeply immersive experience.
+                    </p>
+                    <div class="art-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Artist</span>
+                            <span class="detail-value">Elena Rodriguez</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Medium</span>
+                            <span class="detail-value">Oil on Belgian Linen</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Dimensions</span>
+                            <span class="detail-value">60" × 40"</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Collection</span>
+                            <span class="detail-value">Natural Wonders</span>
+                        </div>
+                    </div>
+                    <button class="premium-action" data-target="extended-2">
+                        <span>Discover This Landscape</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="item-image-container">
+                    <div class="image-frame">
+                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Mountain Landscape Painting">
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Item 3: Image Left, Text Right -->
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false">
+                <div class="item-number">03</div>
+                <div class="item-image-container">
+                    <div class="image-frame">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Portrait Artwork">
+                    </div>
+                </div>
+                <div class="item-content">
+                    <span class="item-category"><i class="fas fa-user-circle"></i> Contemporary Portraiture</span>
+                    <h2 class="item-title">Silent Dialogue</h2>
+                    <p class="item-subtitle">An Intimate Exploration of Identity</p>
+                    <p class="item-description">
+                        This compelling portrait delves into the complexities of human emotion and self-perception. 
+                        Through masterful use of chiaroscuro and psychological depth, the artist reveals layers 
+                        of personality rarely captured in portraiture.
+                    </p>
+                    <div class="art-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Artist</span>
+                            <span class="detail-value">Marcus Chen</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Medium</span>
+                            <span class="detail-value">Oil & Tempera on Panel</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Dimensions</span>
+                            <span class="detail-value">40" × 30"</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Collection</span>
+                            <span class="detail-value">Human Expressions</span>
+                        </div>
+                    </div>
+                    <button class="premium-action" data-target="extended-3">
+                        <span>View This Portrait</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </article>
+            
+            <!-- Item 4: Image Right, Text Left -->
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false">
+                <div class="item-number">04</div>
+                <div class="item-content">
+                    <span class="item-category"><i class="fas fa-sculpture"></i> Modern Sculpture</span>
+                    <h2 class="item-title">Form & Essence</h2>
+                    <p class="item-subtitle">The Poetry of Space & Material</p>
+                    <p class="item-description">
+                        A sculptural exploration that challenges perceptions of form, space, and materiality. 
+                        This bronze masterpiece captures the tension between solidity and movement, inviting 
+                        viewers to experience art from multiple perspectives.
+                    </p>
+                    <div class="art-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Artist</span>
+                            <span class="detail-value">Aisha Patel</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Medium</span>
+                            <span class="detail-value">Bronze & Marble Base</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Dimensions</span>
+                            <span class="detail-value">24" × 18" × 12"</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Collection</span>
+                            <span class="detail-value">Sculptural Forms</span>
+                        </div>
+                    </div>
+                    <button class="premium-action" data-target="extended-4">
+                        <span>Explore This Sculpture</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="item-image-container">
+                    <div class="image-frame">
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Modern Sculpture Art">
+                    </div>
+                </div>
+            </article>
+            
+        </div>
+        
+        <!-- Enhanced Footer Call-to-Action -->
+        <div class="gallery-footer" data-aos="fade-up" data-aos-once="false">
+            <h2 class="footer-title">Explore Our Full Collection</h2>
+            <p class="footer-subtitle">
+                Discover over 500 exceptional artworks from emerging and established artists worldwide. 
+                Our curated collections represent the finest in contemporary and classical art.
+            </p>
+            <button class="premium-action footer-action">
+                <span>View Complete Gallery</span>
+                <i class="fas fa-gem"></i>
+            </button>
+        </div>
+        
+    </section>
+
+    <!-- ====== SCRIPTS ====== -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS with premium settings
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out-cubic',
+            once: false,
+            mirror: true,
+            offset: 120,
+            delay: 0,
+            anchorPlacement: 'top-bottom',
+            disable: window.innerWidth < 768
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            AOS.refresh();
+        });
+        
+        // Premium Button Interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const premiumButtons = document.querySelectorAll('.premium-action');
+            
+            premiumButtons.forEach(button => {
+                if (button.hasAttribute('data-target')) {
+                    button.addEventListener('click', function() {
+                        const targetId = this.getAttribute('data-target');
+                        const targetElement = document.getElementById(targetId);
+                        
+                        if (targetElement) {
+                            const isExpanded = targetElement.classList.contains('expanded');
+                            
+                            if (isExpanded) {
+                                targetElement.classList.remove('expanded');
+                                this.classList.remove('expanded');
+                                this.innerHTML = '<span>Explore This Masterpiece</span><i class="fas fa-arrow-right"></i>';
+                            } else {
+                                // Close other expanded sections
+                                document.querySelectorAll('.item-extended.expanded').forEach(item => {
+                                    item.classList.remove('expanded');
+                                });
+                                document.querySelectorAll('.premium-action.expanded').forEach(btn => {
+                                    btn.classList.remove('expanded');
+                                    btn.innerHTML = btn.innerHTML.includes('Discover') 
+                                        ? '<span>Discover This Landscape</span><i class="fas fa-arrow-right"></i>'
+                                        : btn.innerHTML.includes('View') 
+                                        ? '<span>View This Portrait</span><i class="fas fa-arrow-right"></i>'
+                                        : btn.innerHTML.includes('Explore') && btn.innerHTML.includes('Sculpture')
+                                        ? '<span>Explore This Sculpture</span><i class="fas fa-arrow-right"></i>'
+                                        : '<span>Explore This Masterpiece</span><i class="fas fa-arrow-right"></i>';
+                                });
+                                
+                                // Open this section
+                                targetElement.classList.add('expanded');
+                                this.classList.add('expanded');
+                                this.innerHTML = '<span>Show Details</span><i class="fas fa-chevron-up"></i>';
+                                
+                                // Smooth scroll
+                                setTimeout(() => {
+                                    this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                                }, 300);
+                            }
+                        }
+                    });
+                } else {
+                    // For buttons without data-target (like the footer CTA)
+                    button.addEventListener('click', function() {
+                        this.innerHTML = '<span>Opening Gallery...</span><i class="fas fa-spinner fa-spin"></i>';
+                        setTimeout(() => {
+                            this.innerHTML = '<span>View Complete Gallery</span><i class="fas fa-gem"></i>';
+                            alert('Gallery feature would open in a complete implementation.');
+                        }, 1000);
+                    });
+                }
+            });
+            
+            // Add hover effect to gallery items
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+            
+            // Refresh AOS after page loads
+            setTimeout(() => AOS.refresh(), 500);
+        });
+    </script>
+</body>
+</html>
