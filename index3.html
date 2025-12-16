@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zigguratss | Featured Artworks Gallery</title>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts for Zigguratss Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ====== PROFESSIONAL BLACK COLOR PALETTE ====== */
+        :root {
+            /* Brown Accent Colors */
+            --zig-primary: #8B7355;      /* Light warm brown */
+            --zig-secondary: #A68A6F;    /* Medium light brown */
+            --zig-accent: #C4B5A3;       /* Soft light brown accent */
+            
+            /* Text Colors - All Black */
+            --text-dark: #000000;         /* Pure black */
+            --text-medium: #222222;       /* Dark gray */
+            --text-light: #444444;        /* Medium gray */
+            --text-white: #FFFFFF;        /* White */
+            
+            /* Background Colors */
+            --bg-light: #FAF9F7;          /* Warm off-white */
+            --bg-white: #FFFFFF;          /* Pure white */
+            --bg-section-alt: #F5F3F0;    /* Warm alternate background */
+            
+            /* Spacing System - Balanced */
+            --space-unit: 8px;
+            --space-xs: calc(var(--space-unit) * 0.5);   /* 4px */
+            --space-sm: calc(var(--space-unit) * 1);     /* 8px */
+            --space-md: calc(var(--space-unit) * 1.75);  /* 14px */
+            --space-lg: calc(var(--space-unit) * 2.5);   /* 20px */
+            --space-xl: calc(var(--space-unit) * 3);     /* 24px */
+            --space-xxl: calc(var(--space-unit) * 4);    /* 32px */
+            --space-xxxl: calc(var(--space-unit) * 5);   /* 40px */
+            
+            /* Font Sizes - Increased */
+            --font-xs: 0.813rem;    /* 13px */
+            --font-sm: 0.938rem;    /* 15px */
+            --font-base: 1.063rem;  /* 17px */
+            --font-lg: 1.25rem;     /* 20px */
+            --font-xl: 1.5rem;      /* 24px */
+            --font-2xl: 2rem;       /* 32px */
+            --font-3xl: 2.5rem;     /* 40px */
+            --font-4xl: 3rem;       /* 48px */
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+            
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        /* ====== RESET & BASE STYLES ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-medium);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+            font-weight: 400;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        
+        /* ====== MAIN SECTION CONTAINER ====== */
+        .gallery-section {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: var(--space-xxxl) var(--space-lg);
+        }
+        
+        /* ====== PROFESSIONAL HEADER ====== */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-xxl);
+            padding: 0 var(--space-md);
+            position: relative;
+        }
+        
+        .section-tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--font-sm);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--zig-primary);
+            margin-bottom: var(--space-sm);
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: rgba(139, 115, 85, 0.08);
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: var(--font-3xl);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: var(--space-md);
+            position: relative;
+            display: block;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--zig-primary), var(--zig-secondary));
+            border-radius: 2px;
+        }
+        
+        .section-description {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: var(--font-lg);
+            color: var(--text-light);
+            max-width: 700px;
+            margin: var(--space-xl) auto 0;
+            line-height: 1.7;
+            font-weight: 400;
+            padding: 0 var(--space-sm);
+        }
+        
+        /* ====== GALLERY ITEMS WITH BALANCED SPACING ====== */
+        .gallery-item {
+            display: flex;
+            min-height: 400px;
+            margin-bottom: var(--space-xxl);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background-color: var(--bg-white);
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+            position: relative;
+            opacity: 0;
+        }
+        
+        /* AOS Animations - Start from first/second item */
+        .gallery-item[data-aos="slide-right"] {
+            transform: translateX(-40px) scale(0.98);
+            opacity: 0;
+        }
+        
+        .gallery-item[data-aos="slide-right"].aos-animate {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), 
+                       opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+                       box-shadow 0.3s ease;
+        }
+        
+        .gallery-item[data-aos="slide-left"] {
+            transform: translateX(40px) scale(0.98);
+            opacity: 0;
+        }
+        
+        .gallery-item[data-aos="slide-left"].aos-animate {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), 
+                       opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+                       box-shadow 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        /* Alternating layout */
+        .gallery-item:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .gallery-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        /* Image Container */
+        .item-image-container {
+            flex: 0 0 52%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl);
+            background-color: var(--bg-section-alt);
+            position: relative;
+            min-height: 400px;
+        }
+        
+        .item-image {
+            width: 100%;
+            max-width: 540px;
+            height: 300px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--transition-slow);
+        }
+        
+        .item-image:hover img {
+            transform: scale(1.04);
+        }
+        
+        /* Text Content - Balanced */
+        .item-content {
+            flex: 0 0 48%;
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+            position: relative;
+        }
+        
+        /* Category Badge - Professional */
+        .item-category {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--font-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--zig-primary);
+            margin-bottom: var(--space-sm);
+            display: inline-block;
+            padding: 5px 12px;
+            background-color: rgba(139, 115, 85, 0.08);
+            border-radius: 20px;
+            border-left: 3px solid var(--zig-secondary);
+        }
+        
+        /* Headings - Bigger */
+        .item-title {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: var(--space-xs);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+        
+        .item-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: var(--font-base);
+            font-weight: 500;
+            color: var(--zig-secondary);
+            margin-bottom: var(--space-md);
+            font-style: italic;
+            line-height: 1.5;
+        }
+        
+        /* Description Text - Slightly Bigger */
+        .item-description {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: var(--font-base);
+            line-height: 1.7;
+            color: var(--text-medium);
+            margin-bottom: var(--space-md);
+            font-weight: 400;
+        }
+        
+        /* Extended Content */
+        .item-extended {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            margin-bottom: 0;
+            transform: translateY(-10px);
+        }
+        
+        .item-extended.expanded {
+            max-height: 320px;
+            opacity: 1;
+            margin-bottom: var(--space-lg);
+            transform: translateY(0);
+        }
+        
+        .extended-content {
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            font-size: var(--font-sm);
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        .extended-content p {
+            margin-bottom: var(--space-sm);
+            font-weight: 300;
+        }
+        
+        .art-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .detail-label {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: var(--font-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
+        }
+        
+        .detail-value {
+            color: var(--text-medium);
+            font-weight: 500;
+            font-size: var(--font-sm);
+        }
+        
+        /* Explore More Details Button - Professional */
+        .see-more-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            border: 2px solid var(--zig-primary);
+            padding: 12px 26px;
+            border-radius: var(--radius-md);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: var(--font-base);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            text-decoration: none;
+            width: fit-content;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.3px;
+            margin-top: auto;
+        }
+        
+        .see-more-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--zig-primary), var(--zig-secondary));
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+        
+        .see-more-btn span {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .see-more-btn:hover {
+            color: var(--text-white);
+            border-color: var(--zig-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .see-more-btn:hover:before {
+            transform: translateX(0);
+        }
+        
+        .see-more-btn.expanded {
+            background-color: var(--zig-secondary);
+            color: var(--text-white);
+            border-color: var(--zig-secondary);
+        }
+        
+        .see-more-btn.expanded:before {
+            display: none;
+        }
+        
+        .btn-icon {
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            font-size: 0.8em;
+            margin-left: 4px;
+        }
+        
+        .see-more-btn.expanded .btn-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Decorative Line */
+        .zig-decorative-line {
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+            margin: var(--space-xl) 0;
+        }
+        
+        /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 1200px) {
+            .gallery-section {
+                max-width: 1100px;
+            }
+            
+            .section-title {
+                font-size: var(--font-2xl);
+            }
+            
+            .item-title {
+                font-size: var(--font-lg);
+            }
+            
+            .item-image {
+                height: 280px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .gallery-item {
+                flex-direction: column;
+                min-height: auto;
+                margin-bottom: var(--space-xl);
+            }
+            
+            .gallery-item:nth-child(odd),
+            .gallery-item:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .item-image-container,
+            .item-content {
+                flex: 0 0 100%;
+                min-height: auto;
+                padding: var(--space-lg);
+            }
+            
+            .item-image-container {
+                padding-bottom: var(--space-sm);
+            }
+            
+            .item-image {
+                height: 260px;
+                max-width: 100%;
+            }
+            
+            .section-header {
+                margin-bottom: var(--space-xl);
+            }
+            
+            /* Mobile animations */
+            .gallery-item[data-aos="slide-right"],
+            .gallery-item[data-aos="slide-left"] {
+                transform: translateY(20px) scale(0.98);
+                opacity: 0;
+            }
+            
+            .gallery-item[data-aos="slide-right"].aos-animate,
+            .gallery-item[data-aos="slide-left"].aos-animate {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            
+            .item-content {
+                padding-top: var(--space-md);
+            }
+            
+            .zig-decorative-line {
+                margin: var(--space-lg) 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-section {
+                padding: var(--space-xxl) var(--space-md);
+            }
+            
+            .section-header {
+                margin-bottom: var(--space-xl);
+                padding: 0;
+            }
+            
+            .section-title {
+                font-size: var(--font-xl);
+            }
+            
+            .section-description {
+                font-size: var(--font-base);
+                margin: var(--space-lg) auto 0;
+            }
+            
+            .item-title {
+                font-size: var(--font-base);
+            }
+            
+            .item-subtitle {
+                font-size: var(--font-sm);
+            }
+            
+            .item-description {
+                font-size: var(--font-sm);
+            }
+            
+            .art-details {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+            
+            .item-image-container,
+            .item-content {
+                padding: var(--space-md);
+            }
+            
+            .item-image {
+                height: 220px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-section {
+                padding: var(--space-xl) var(--space-sm);
+            }
+            
+            .section-title {
+                font-size: var(--font-lg);
+            }
+            
+            .section-description {
+                font-size: var(--font-sm);
+            }
+            
+            .item-image {
+                height: 200px;
+            }
+            
+            .item-content {
+                padding: var(--space-sm);
+            }
+            
+            .see-more-btn {
+                padding: 10px 20px;
+                font-size: var(--font-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ====== ZIGGURATSS GALLERY SECTION ====== -->
+    <section class="gallery-section">
+        
+        <!-- HEADER -->
+        <div class="section-header" data-aos="fade-up" data-aos-duration="700" data-aos-once="false">
+            <span class="section-tagline">Gallery Collection</span>
+            <h1 class="section-title">Featured Artworks</h1>
+            <p class="section-description">
+                Discover extraordinary artworks from renowned and emerging artists worldwide. 
+                Each piece is curated for exceptional quality, artistic innovation, and emotional resonance.
+            </p>
+        </div>
+        
+        <!-- Item 1: Image Left, Text Right -->
+        <article class="gallery-item" data-aos="slide-right" data-aos-duration="700" data-aos-once="false" data-aos-delay="0">
+            <div class="item-image-container">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Abstract Expressionism">
+                </div>
+            </div>
+            <div class="item-content">
+                <span class="item-category">Abstract Expressionism</span>
+                <h2 class="item-title">Vibrant Harmony</h2>
+                <p class="item-subtitle">A Symphony of Color & Form</p>
+                <p class="item-description">
+                    This contemporary masterpiece explores the dynamic interplay between structured form and spontaneous expression. 
+                    Bold, textured brushstrokes create a visual rhythm that engages both the eye and the imagination.
+                </p>
+                <div class="item-extended" id="extended-1">
+                    <div class="extended-content">
+                        <p>Created during a year-long artistic exploration in Barcelona, this piece represents the culmination of the artist's study on emotional resonance through color theory.</p>
+                        <div class="art-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Artist</span>
+                                <span class="detail-value">Somnath Bothe</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Medium</span>
+                                <span class="detail-value">Acrylic on Canvas</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Dimensions</span>
+                                <span class="detail-value">48" × 36"</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Year</span>
+                                <span class="detail-value">2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="see-more-btn" data-target="extended-1">
+                    <span>Explore More Details</span>
+                    <span class="btn-icon">▼</span>
+                </button>
+            </div>
+        </article>
+        
+        <div class="zig-decorative-line"></div>
+        
+        <!-- Item 2: Image Right, Text Left -->
+        <article class="gallery-item" data-aos="slide-left" data-aos-duration="700" data-aos-once="false" data-aos-delay="100">
+            <div class="item-content">
+                <span class="item-category">Landscape Mastery</span>
+                <h2 class="item-title">Alpine Dawn</h2>
+                <p class="item-subtitle">Morning Light on Majestic Peaks</p>
+                <p class="item-description">
+                    Capturing the serene majesty of untouched wilderness at the break of dawn. 
+                    This landscape masterfully renders the interplay of light and shadow across snow-capped peaks.
+                </p>
+                <div class="item-extended" id="extended-2">
+                    <div class="extended-content">
+                        <p>Painted en plein air during a Himalayan expedition, this work documents the artist's encounter with sublime natural beauty at 12,000 feet elevation.</p>
+                        <div class="art-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Artist</span>
+                                <span class="detail-value">Elena Rodriguez</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Medium</span>
+                                <span class="detail-value">Oil on Linen</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Dimensions</span>
+                                <span class="detail-value">60" × 40"</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Year</span>
+                                <span class="detail-value">2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="see-more-btn" data-target="extended-2">
+                    <span>Explore More Details</span>
+                    <span class="btn-icon">▼</span>
+                </button>
+            </div>
+            <div class="item-image-container">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Mountain Landscape">
+                </div>
+            </div>
+        </article>
+        
+        <div class="zig-decorative-line"></div>
+        
+        <!-- Item 3: Image Left, Text Right -->
+        <article class="gallery-item" data-aos="slide-right" data-aos-duration="700" data-aos-once="false" data-aos-delay="150">
+            <div class="item-image-container">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Portrait">
+                </div>
+            </div>
+            <div class="item-content">
+                <span class="item-category">Contemporary Portraiture</span>
+                <h2 class="item-title">Quiet Reflection</h2>
+                <p class="item-subtitle">A Study in Human Emotion</p>
+                <p class="item-description">
+                    An intimate portrait capturing a moment of profound introspection. 
+                    The artist's masterful rendering of subtle expression reveals layers of emotional depth and psychological complexity.
+                </p>
+                <div class="item-extended" id="extended-3">
+                    <div class="extended-content">
+                        <p>Part of the artist's acclaimed "Silent Dialogues" series, this portrait examines the intersection of identity, memory, and contemporary existence.</p>
+                        <div class="art-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Artist</span>
+                                <span class="detail-value">Marcus Chen</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Medium</span>
+                                <span class="detail-value">Oil on Canvas</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Dimensions</span>
+                                <span class="detail-value">40" × 30"</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Year</span>
+                                <span class="detail-value">2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="see-more-btn" data-target="extended-3">
+                    <span>Explore More Details</span>
+                    <span class="btn-icon">▼</span>
+                </button>
+            </div>
+        </article>
+        
+        <div class="zig-decorative-line"></div>
+        
+        <!-- Item 4: Image Right, Text Left -->
+        <article class="gallery-item" data-aos="slide-left" data-aos-duration="700" data-aos-once="false" data-aos-delay="200">
+            <div class="item-content">
+                <span class="item-category">Modern Sculpture</span>
+                <h2 class="item-title">Organic Forms</h2>
+                <p class="item-subtitle">Nature's Geometry in Bronze</p>
+                <p class="item-description">
+                    A sculptural exploration of natural forms rendered in timeless materials. 
+                    This piece investigates the tension between organic irregularity and geometric precision.
+                </p>
+                <div class="item-extended" id="extended-4">
+                    <div class="extended-content">
+                        <p>Cast using the traditional lost-wax method with contemporary finishing techniques, this sculpture represents eight months of meticulous work.</p>
+                        <div class="art-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Artist</span>
+                                <span class="detail-value">Aisha Patel</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Medium</span>
+                                <span class="detail-value">Bronze & Marble</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Dimensions</span>
+                                <span class="detail-value">24" × 18" × 12"</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Year</span>
+                                <span class="detail-value">2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="see-more-btn" data-target="extended-4">
+                    <span>Explore More Details</span>
+                    <span class="btn-icon">▼</span>
+                </button>
+            </div>
+            <div class="item-image-container">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Modern Sculpture">
+                </div>
+            </div>
+        </article>
+        
+        <div class="zig-decorative-line"></div>
+        
+        <!-- Item 5: Image Left, Text Right -->
+        <article class="gallery-item" data-aos="slide-right" data-aos-duration="700" data-aos-once="false" data-aos-delay="250">
+            <div class="item-image-container">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Digital Art">
+                </div>
+            </div>
+            <div class="item-content">
+                <span class="item-category">Digital Innovation</span>
+                <h2 class="item-title">Digital Frontier</h2>
+                <p class="item-subtitle">Code & Creativity Converge</p>
+                <p class="item-description">
+                    Pushing the boundaries of artistic expression through algorithmic generation and digital manipulation. 
+                    This work represents the cutting edge of technology-mediated creativity.
+                </p>
+                <div class="item-extended" id="extended-5">
+                    <div class="extended-content">
+                        <p>Created using custom generative algorithms and enhanced with augmented reality layers, this piece evolves when viewed through the companion mobile application.</p>
+                        <div class="art-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Artist</span>
+                                <span class="detail-value">Digital Collective</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Medium</span>
+                                <span class="detail-value">Digital Print & AR</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Dimensions</span>
+                                <span class="detail-value">36" × 24"</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Year</span>
+                                <span class="detail-value">2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="see-more-btn" data-target="extended-5">
+                    <span>Explore More Details</span>
+                    <span class="btn-icon">▼</span>
+                </button>
+            </div>
+        </article>
+        
+        <div class="zig-decorative-line"></div>
+        
+        <!-- Item 6: Image Right, Text Left -->
+        <article class="gallery-item" data-aos="slide-left" data-aos-duration="700" data-aos-once="false" data-aos-delay="300">
+            <div class="item-content">
+                <span class="item-category">Textile Art</span>
+                <h2 class="item-title">Woven Stories</h2>
+                <p class="item-subtitle">Fiber Narratives & Cultural Heritage</p>
+                <p class="item-description">
+                    Revitalizing ancient textile techniques through contemporary design and narrative storytelling. 
+                    Each thread contributes to a larger story of cultural preservation and artistic innovation.
+                </p>
+                <div class="item-extended" id="extended-6">
+                    <div class="extended-content">
+                        <p>Created in collaboration with master weavers from Rajasthan, this piece incorporates traditional ikat dyeing with contemporary design principles.</p>
+                        <div class="art-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Artist</span>
+                                <span class="detail-value">Weave Collective</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Medium</span>
+                                <span class="detail-value">Silk & Natural Dyes</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Dimensions</span>
+                                <span class="detail-value">72" × 48"</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Year</span>
+                                <span class="detail-value">2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="see-more-btn" data-target="extended-6">
+                    <span>Explore More Details</span>
+                    <span class="btn-icon">▼</span>
+                </button>
+            </div>
+            <div class="item-image-container">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Textile Art">
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- ====== SCRIPTS ====== -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS with animation starting from first item
+        AOS.init({
+            duration: 700,
+            easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
+            once: false,
+            mirror: true,
+            offset: 100,
+            delay: 0,
+            anchorPlacement: 'top-bottom',
+            disable: window.innerWidth < 768,
+            startEvent: 'DOMContentLoaded'
+        });
+        
+        window.addEventListener('resize', () => {
+            AOS.refresh();
+        });
+        
+        // "Explore More Details" functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const seeMoreButtons = document.querySelectorAll('.see-more-btn');
+            
+            seeMoreButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const targetId = this.getAttribute('data-target');
+                    const targetElement = document.getElementById(targetId);
+                    const isExpanded = targetElement.classList.contains('expanded');
+                    
+                    // Button click animation
+                    this.style.transform = 'scale(0.96)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                    
+                    if (isExpanded) {
+                        // Collapse animation
+                        targetElement.classList.remove('expanded');
+                        this.classList.remove('expanded');
+                        this.innerHTML = '<span>Explore More Details</span><span class="btn-icon">▼</span>';
+                    } else {
+                        // Close all other expanded items
+                        document.querySelectorAll('.item-extended.expanded').forEach(item => {
+                            const btn = item.closest('.item-content').querySelector('.see-more-btn');
+                            item.classList.remove('expanded');
+                            btn.classList.remove('expanded');
+                            btn.innerHTML = '<span>Explore More Details</span><span class="btn-icon">▼</span>';
+                        });
+                        
+                        // Expand this item with animation
+                        targetElement.classList.add('expanded');
+                        this.classList.add('expanded');
+                        this.innerHTML = '<span>Show Less</span><span class="btn-icon">▲</span>';
+                        
+                        // Smooth scroll to keep item in view
+                        setTimeout(() => {
+                            this.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'center',
+                                inline: 'nearest'
+                            });
+                        }, 350);
+                    }
+                });
+            });
+            
+            // Close expanded items when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.see-more-btn') && !e.target.closest('.item-extended')) {
+                    document.querySelectorAll('.item-extended.expanded').forEach(item => {
+                        const btn = item.closest('.item-content').querySelector('.see-more-btn');
+                        item.classList.remove('expanded');
+                        btn.classList.remove('expanded');
+                        btn.innerHTML = '<span>Explore More Details</span><span class="btn-icon">▼</span>';
+                    });
+                }
+            });
+            
+            // Add hover effect for images
+            const images = document.querySelectorAll('.item-image');
+            images.forEach(img => {
+                img.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = 'var(--shadow-xl)';
+                });
+                
+                img.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = 'var(--shadow-lg)';
+                });
+            });
+            
+            // Refresh AOS after a short delay
+            setTimeout(() => AOS.refresh(), 500);
+        });
+    </script>
+</body>
+</html>
