@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zigguratss | Featured Artworks Gallery</title>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts for Zigguratss Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ====== ZIGGURATSS REDESIGN COLOR PALETTE ====== */
+        :root {
+            /* Primary Zigguratss Colors */
+            --zig-primary: #1a1f2c;      /* Deep navy/charcoal */
+            --zig-secondary: #2a3b5f;    /* Muted blue */
+            --zig-accent: #8c6d46;       /* Warm bronze/gold */
+            --zig-accent-light: #c5a572; /* Light gold */
+            --zig-light: #f5f3ef;        /* Warm off-white */
+            --zig-gray: #e8e6e1;         /* Light gray */
+            --zig-dark-gray: #7a7a7a;    /* Medium gray */
+            
+            /* Text Colors */
+            --text-dark: #1a1f2c;         /* Dark charcoal */
+            --text-medium: #4a4a4a;       /* Medium gray */
+            --text-light: #7a7a7a;        /* Light gray */
+            --text-white: #ffffff;        /* White */
+            
+            /* Background Colors */
+            --bg-light: #f9f8f5;          /* Very light warm white */
+            --bg-white: #ffffff;          /* Pure white */
+            --bg-section-alt: #f0ede8;    /* Warm alternate background */
+            
+            /* Accent Colors */
+            --accent-primary: #8c6d46;    /* Bronze accent */
+            --accent-secondary: #2a3b5f;  /* Blue accent */
+            
+            /* Spacing System - Refined for consistency */
+            --space-unit: 8px;
+            --space-xs: calc(var(--space-unit) * 0.75);   /* 6px */
+            --space-sm: calc(var(--space-unit) * 1.5);    /* 12px */
+            --space-md: calc(var(--space-unit) * 2.25);   /* 18px */
+            --space-lg: calc(var(--space-unit) * 3);      /* 24px */
+            --space-xl: calc(var(--space-unit) * 4);      /* 32px */
+            --space-xxl: calc(var(--space-unit) * 5);     /* 40px */
+            --space-xxxl: calc(var(--space-unit) * 6);    /* 48px */
+            
+            /* Font Sizes - Refined to match Zigguratss scale */
+            --font-xs: 0.75rem;    /* 12px */
+            --font-sm: 0.875rem;   /* 14px */
+            --font-base: 1rem;     /* 16px */
+            --font-lg: 1.125rem;   /* 18px */
+            --font-xl: 1.25rem;    /* 20px */
+            --font-2xl: 1.5rem;    /* 24px */
+            --font-3xl: 1.75rem;   /* 28px */
+            --font-4xl: 2rem;      /* 32px */
+            --font-5xl: 2.5rem;    /* 40px */
+            --font-6xl: 3rem;      /* 48px */
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-round: 50%;
+            
+            /* Shadows - Refined for subtlety */
+            --shadow-sm: 0 2px 6px rgba(26, 31, 44, 0.04);
+            --shadow-md: 0 4px 12px rgba(26, 31, 44, 0.06);
+            --shadow-lg: 0 8px 24px rgba(26, 31, 44, 0.08);
+            --shadow-xl: 0 12px 36px rgba(26, 31, 44, 0.10);
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.25s ease;
+            --transition-slow: 0.35s ease;
+        }
+        
+        /* ====== RESET & BASE STYLES ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-medium);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+            font-weight: 400;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+        
+        /* ====== MAIN SECTION CONTAINER - Refined ====== */
+        .gallery-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-xxl) var(--space-lg);
+        }
+        
+        /* ====== REFINED SECTION HEADER ====== */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            padding: 0 var(--space-md);
+            position: relative;
+        }
+        
+        .section-tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--font-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--zig-accent);
+            margin-bottom: var(--space-md);
+            display: inline-block;
+            padding: var(--space-xs) var(--space-sm);
+            background-color: rgba(140, 109, 70, 0.08);
+            border-radius: 20px;
+            border: 1px solid rgba(140, 109, 70, 0.15);
+        }
+        
+        .section-title-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: var(--space-md);
+        }
+        
+        .section-title {
+            font-size: var(--font-4xl);
+            font-weight: 700;
+            color: var(--zig-primary);
+            position: relative;
+            display: inline-block;
+            letter-spacing: -0.015em;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--zig-accent), var(--zig-accent-light));
+            border-radius: 2px;
+        }
+        
+        .section-description {
+            font-family: 'Playfair Display', serif;
+            font-size: var(--font-lg);
+            color: var(--text-light);
+            max-width: 680px;
+            margin: var(--space-lg) auto 0;
+            line-height: 1.6;
+            font-weight: 300;
+            font-style: italic;
+            padding: var(--space-md);
+            background-color: rgba(245, 243, 239, 0.5);
+            border-radius: var(--radius-md);
+            border-left: 2px solid var(--zig-accent);
+        }
+        
+        /* ====== SIMPLE TAB SYSTEM ====== */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--space-xxl);
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            padding: 0 var(--space-md);
+        }
+        
+        .tab-button {
+            background: transparent;
+            border: 1px solid var(--zig-gray);
+            padding: var(--space-sm) var(--space-lg);
+            font-family: 'Inter', sans-serif;
+            font-size: var(--font-sm);
+            font-weight: 500;
+            color: var(--text-medium);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            white-space: nowrap;
+        }
+        
+        .tab-button:hover {
+            border-color: var(--zig-accent);
+            color: var(--zig-accent);
+            transform: translateY(-2px);
+        }
+        
+        .tab-button.active {
+            background-color: var(--zig-accent);
+            border-color: var(--zig-accent);
+            color: var(--text-white);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ====== REFINED GALLERY ITEMS ====== */
+        .gallery-item {
+            display: flex;
+            min-height: 400px;
+            margin-bottom: var(--space-xl);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background-color: var(--bg-white);
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+            position: relative;
+            border: 1px solid var(--zig-gray);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Alternating layout */
+        .gallery-item:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .gallery-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        /* Image Container - Refined */
+        .item-image-container {
+            flex: 0 0 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+            background-color: var(--zig-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .item-image-container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(140, 109, 70, 0.02) 0%, transparent 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .item-image {
+            width: 100%;
+            max-width: 480px;
+            height: 300px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow-md);
+            z-index: 2;
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--transition-slow);
+        }
+        
+        .item-image:hover img {
+            transform: scale(1.03);
+        }
+        
+        /* Text Content - Refined */
+        .item-content {
+            flex: 0 0 50%;
+            padding: var(--space-xl) var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        /* Category Badge - Refined */
+        .item-category {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--font-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--zig-accent);
+            background-color: rgba(140, 109, 70, 0.08);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: var(--space-md);
+            display: inline-block;
+            border: 1px solid rgba(140, 109, 70, 0.12);
+            align-self: flex-start;
+        }
+        
+        /* Professional Headings - Refined */
+        .item-title {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            color: var(--zig-primary);
+            margin-bottom: var(--space-xs);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            position: relative;
+            padding-bottom: var(--space-sm);
+        }
+        
+        .item-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 36px;
+            height: 2px;
+            background-color: var(--zig-accent);
+            border-radius: 1px;
+        }
+        
+        .item-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: var(--font-base);
+            font-weight: 500;
+            color: var(--zig-secondary);
+            margin-bottom: var(--space-md);
+            font-style: italic;
+            line-height: 1.4;
+        }
+        
+        /* Description Text - Refined */
+        .item-description {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: var(--font-base);
+            line-height: 1.6;
+            color: var(--text-medium);
+            margin-bottom: var(--space-lg);
+            font-weight: 400;
+        }
+        
+        /* ====== REFINED EXTENDED CONTENT ====== */
+        .item-extended-wrapper {
+            position: relative;
+            margin-top: auto;
+        }
+        
+        .item-extended {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: all var(--transition-base);
+            margin-bottom: 0;
+            position: absolute;
+            width: 100%;
+            background: var(--bg-white);
+            z-index: 10;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--zig-gray);
+            visibility: hidden;
+        }
+        
+        .item-extended.expanded {
+            max-height: 360px;
+            opacity: 1;
+            transform: translateY(0);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            visibility: visible;
+        }
+        
+        .extended-content {
+            padding: var(--space-md);
+            font-size: var(--font-base);
+            color: var(--text-medium);
+            line-height: 1.6;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        
+        .extended-content p {
+            margin-bottom: var(--space-sm);
+            font-weight: 300;
+        }
+        
+        .art-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+            padding-top: var(--space-sm);
+            border-top: 1px solid var(--zig-gray);
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .detail-label {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--zig-accent);
+            font-size: var(--font-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 2px;
+        }
+        
+        .detail-value {
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: var(--font-sm);
+        }
+        
+        /* ====== REFINED BUTTON STYLING ====== */
+        .see-more-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            background-color: transparent;
+            color: var(--zig-accent);
+            border: 1px solid var(--zig-accent);
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: var(--font-sm);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-decoration: none;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.1px;
+            margin-top: var(--space-sm);
+        }
+        
+        .see-more-btn:hover {
+            background-color: var(--zig-accent);
+            color: var(--text-white);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .see-more-btn.expanded {
+            background-color: var(--zig-primary);
+            color: var(--text-white);
+            border-color: var(--zig-primary);
+        }
+        
+        .btn-icon {
+            transition: transform var(--transition-base);
+            font-size: 0.7em;
+        }
+        
+        .see-more-btn.expanded .btn-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* ====== REFINED DECORATIVE ELEMENTS ====== */
+        .zig-decorative-line {
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, var(--zig-gray), transparent);
+            margin: var(--space-xl) 0;
+        }
+        
+        /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 1200px) {
+            .gallery-section {
+                max-width: 1000px;
+            }
+            
+            .section-title {
+                font-size: var(--font-3xl);
+            }
+            
+            .item-title {
+                font-size: var(--font-xl);
+            }
+            
+            .item-image {
+                height: 280px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .gallery-item {
+                flex-direction: column;
+                min-height: auto;
+                margin-bottom: var(--space-lg);
+            }
+            
+            .gallery-item:nth-child(odd),
+            .gallery-item:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .item-image-container,
+            .item-content {
+                flex: 0 0 100%;
+                min-height: auto;
+                padding: var(--space-lg);
+            }
+            
+            .item-image-container {
+                padding-bottom: var(--space-sm);
+            }
+            
+            .item-image {
+                height: 280px;
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-section {
+                padding: var(--space-xl) var(--space-md);
+            }
+            
+            .section-header {
+                margin-bottom: var(--space-xl);
+            }
+            
+            .section-title {
+                font-size: var(--font-2xl);
+            }
+            
+            .section-description {
+                font-size: var(--font-base);
+                padding: var(--space-sm);
+                margin-top: var(--space-md);
+            }
+            
+            .tab-container {
+                margin-bottom: var(--space-xl);
+            }
+            
+            .tab-button {
+                padding: var(--space-xs) var(--space-md);
+                font-size: var(--font-xs);
+            }
+            
+            .item-title {
+                font-size: var(--font-lg);
+            }
+            
+            .item-subtitle {
+                font-size: var(--font-sm);
+            }
+            
+            .item-description {
+                font-size: var(--font-sm);
+            }
+            
+            .art-details {
+                grid-template-columns: 1fr;
+                gap: var(--space-xs);
+            }
+            
+            .item-image-container,
+            .item-content {
+                padding: var(--space-md);
+            }
+            
+            .item-image {
+                height: 240px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-section {
+                padding: var(--space-lg) var(--space-sm);
+            }
+            
+            .section-title {
+                font-size: var(--font-xl);
+            }
+            
+            .section-description {
+                font-size: var(--font-sm);
+            }
+            
+            .tab-container {
+                gap: var(--space-xs);
+            }
+            
+            .tab-button {
+                padding: 8px 12px;
+                font-size: 11px;
+            }
+            
+            .item-image {
+                height: 200px;
+            }
+            
+            .item-extended.expanded {
+                max-height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ====== ZIGGURATSS GALLERY SECTION ====== -->
+    <section class="gallery-section">
+        
+        <!-- Refined Zigguratss Header -->
+        <div class="section-header" data-aos="fade-up" data-aos-once="false">
+            <span class="section-tagline">Exclusive Collection</span>
+            <div class="section-title-container">
+                <h1 class="section-title">Masterpiece Gallery</h1>
+            </div>
+            <p class="section-description">
+                Discover extraordinary artworks from renowned and emerging artists worldwide. 
+                Each piece is curated for exceptional quality, artistic innovation, and emotional resonance.
+            </p>
+        </div>
+        
+        <!-- Simple Tab System -->
+        <div class="tab-container" data-aos="fade-up" data-aos-once="false">
+            <button class="tab-button active" data-tab="all">All Artworks</button>
+            <button class="tab-button" data-tab="abstract">Abstract</button>
+            <button class="tab-button" data-tab="landscape">Landscape</button>
+            <button class="tab-button" data-tab="portrait">Portrait</button>
+            <button class="tab-button" data-tab="sculpture">Sculpture</button>
+            <button class="tab-button" data-tab="digital">Digital</button>
+            <button class="tab-button" data-tab="textile">Textile</button>
+        </div>
+        
+        <!-- Tab 1: All Artworks -->
+        <div class="tab-content active" id="all-tab">
+            <!-- Item 1: Image Left, Text Right -->
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false" data-category="abstract">
+                <div class="item-image-container">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Abstract Expressionism - Vibrant Colors">
+                    </div>
+                </div>
+                <div class="item-content">
+                    <span class="item-category">Abstract Expressionism</span>
+                    <h2 class="item-title">Vibrant Harmony</h2>
+                    <p class="item-subtitle">A Symphony of Color & Form</p>
+                    <p class="item-description">
+                        This contemporary masterpiece explores the dynamic interplay between structured form and spontaneous expression. 
+                        Bold, textured brushstrokes create a visual rhythm that engages both the eye and the imagination.
+                    </p>
+                    
+                    <div class="item-extended-wrapper">
+                        <div class="item-extended" id="extended-1">
+                            <div class="extended-content">
+                                <p>Created during a year-long artistic exploration in Barcelona, this piece represents the culmination of the artist's study on emotional resonance through color theory.</p>
+                                <div class="art-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Artist</span>
+                                        <span class="detail-value">Somnath Bothe</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium</span>
+                                        <span class="detail-value">Acrylic on Canvas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Dimensions</span>
+                                        <span class="detail-value">48" × 36"</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year</span>
+                                        <span class="detail-value">2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="see-more-btn" data-target="extended-1">
+                            View Artwork Details
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Decorative Line -->
+            <div class="zig-decorative-line"></div>
+            
+            <!-- Item 2: Image Right, Text Left -->
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false" data-category="landscape">
+                <div class="item-content">
+                    <span class="item-category">Landscape Mastery</span>
+                    <h2 class="item-title">Alpine Dawn</h2>
+                    <p class="item-subtitle">Morning Light on Majestic Peaks</p>
+                    <p class="item-description">
+                        Capturing the serene majesty of untouched wilderness at the break of dawn. 
+                        This landscape masterfully renders the interplay of light and shadow across snow-capped peaks.
+                    </p>
+                    
+                    <div class="item-extended-wrapper">
+                        <div class="item-extended" id="extended-2">
+                            <div class="extended-content">
+                                <p>Painted en plein air during a Himalayan expedition, this work documents the artist's encounter with sublime natural beauty at 12,000 feet elevation.</p>
+                                <div class="art-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Artist</span>
+                                        <span class="detail-value">Elena Rodriguez</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium</span>
+                                        <span class="detail-value">Oil on Linen</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Dimensions</span>
+                                        <span class="detail-value">60" × 40"</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year</span>
+                                        <span class="detail-value">2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="see-more-btn" data-target="extended-2">
+                            View Artwork Details
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="item-image-container">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Mountain Landscape - Alpine Scene">
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Decorative Line -->
+            <div class="zig-decorative-line"></div>
+            
+            <!-- Item 3: Image Left, Text Right -->
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false" data-category="portrait">
+                <div class="item-image-container">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Portrait - Introspective Moment">
+                    </div>
+                </div>
+                <div class="item-content">
+                    <span class="item-category">Contemporary Portraiture</span>
+                    <h2 class="item-title">Quiet Reflection</h2>
+                    <p class="item-subtitle">A Study in Human Emotion</p>
+                    <p class="item-description">
+                        An intimate portrait capturing a moment of profound introspection. 
+                        The artist's masterful rendering of subtle expression reveals layers of emotional depth and psychological complexity.
+                    </p>
+                    
+                    <div class="item-extended-wrapper">
+                        <div class="item-extended" id="extended-3">
+                            <div class="extended-content">
+                                <p>Part of the artist's acclaimed "Silent Dialogues" series, this portrait examines the intersection of identity, memory, and contemporary existence.</p>
+                                <div class="art-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Artist</span>
+                                        <span class="detail-value">Marcus Chen</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium</span>
+                                        <span class="detail-value">Oil on Canvas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Dimensions</span>
+                                        <span class="detail-value">40" × 30"</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year</span>
+                                        <span class="detail-value">2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="see-more-btn" data-target="extended-3">
+                            View Artwork Details
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Decorative Line -->
+            <div class="zig-decorative-line"></div>
+            
+            <!-- Item 4: Image Right, Text Left -->
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false" data-category="sculpture">
+                <div class="item-content">
+                    <span class="item-category">Modern Sculpture</span>
+                    <h2 class="item-title">Organic Forms</h2>
+                    <p class="item-subtitle">Nature's Geometry in Bronze</p>
+                    <p class="item-description">
+                        A sculptural exploration of natural forms rendered in timeless materials. 
+                        This piece investigates the tension between organic irregularity and geometric precision.
+                    </p>
+                    
+                    <div class="item-extended-wrapper">
+                        <div class="item-extended" id="extended-4">
+                            <div class="extended-content">
+                                <p>Cast using the traditional lost-wax method with contemporary finishing techniques, this sculpture represents eight months of meticulous work.</p>
+                                <div class="art-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Artist</span>
+                                        <span class="detail-value">Aisha Patel</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium</span>
+                                        <span class="detail-value">Bronze & Marble</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Dimensions</span>
+                                        <span class="detail-value">24" × 18" × 12"</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year</span>
+                                        <span class="detail-value">2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="see-more-btn" data-target="extended-4">
+                            View Artwork Details
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="item-image-container">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Modern Sculpture - Bronze Art">
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Tab 2: Abstract Art -->
+        <div class="tab-content" id="abstract-tab">
+            <!-- This content would be similar to above but filtered -->
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false">
+                <div class="item-image-container">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Abstract Expressionism">
+                    </div>
+                </div>
+                <div class="item-content">
+                    <span class="item-category">Abstract Expressionism</span>
+                    <h2 class="item-title">Vibrant Harmony</h2>
+                    <p class="item-subtitle">A Symphony of Color & Form</p>
+                    <p class="item-description">
+                        This contemporary masterpiece explores the dynamic interplay between structured form and spontaneous expression. 
+                    </p>
+                    
+                    <div class="item-extended-wrapper">
+                        <div class="item-extended" id="abstract-extended-1">
+                            <div class="extended-content">
+                                <p>Created during a year-long artistic exploration in Barcelona, this piece represents the culmination of the artist's study on emotional resonance through color theory.</p>
+                                <div class="art-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Artist</span>
+                                        <span class="detail-value">Somnath Bothe</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium</span>
+                                        <span class="detail-value">Acrylic on Canvas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Dimensions</span>
+                                        <span class="detail-value">48" × 36"</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year</span>
+                                        <span class="detail-value">2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="see-more-btn" data-target="abstract-extended-1">
+                            View Artwork Details
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+            </article>
+            
+            <div class="zig-decorative-line"></div>
+            
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false">
+                <div class="item-content">
+                    <span class="item-category">Abstract Geometric</span>
+                    <h2 class="item-title">Urban Geometry</h2>
+                    <p class="item-subtitle">City Patterns in Color</p>
+                    <p class="item-description">
+                        Geometric abstraction inspired by urban architecture and cityscapes. Clean lines and bold colors create a dynamic visual experience.
+                    </p>
+                    
+                    <div class="item-extended-wrapper">
+                        <div class="item-extended" id="abstract-extended-2">
+                            <div class="extended-content">
+                                <p>Inspired by the artist's travels to Tokyo and New York, this piece captures the essence of modern urban design through geometric abstraction.</p>
+                                <div class="art-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Artist</span>
+                                        <span class="detail-value">David Kim</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium</span>
+                                        <span class="detail-value">Mixed Media on Panel</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Dimensions</span>
+                                        <span class="detail-value">36" × 36"</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year</span>
+                                        <span class="detail-value">2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="see-more-btn" data-target="abstract-extended-2">
+                            View Artwork Details
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="item-image-container">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1543857778-c4a1a569e388?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Abstract Geometric">
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Tab 3: Landscape Art -->
+        <div class="tab-content" id="landscape-tab">
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false">
+                <div class="item-image-container">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Mountain Landscape">
+                    </div>
+                </div>
+                <div class="item-content">
+                    <span class="item-category">Landscape Mastery</span>
+                    <h2 class="item-title">Alpine Dawn</h2>
+                    <p class="item-subtitle">Morning Light on Majestic Peaks</p>
+                    <p class="item-description">
+                        Capturing the serene majesty of untouched wilderness at the break of dawn.
+                    </p>
+                    
+                    <div class="item-extended-wrapper">
+                        <div class="item-extended" id="landscape-extended-1">
+                            <div class="extended-content">
+                                <p>Painted en plein air during a Himalayan expedition, this work documents the artist's encounter with sublime natural beauty at 12,000 feet elevation.</p>
+                                <div class="art-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Artist</span>
+                                        <span class="detail-value">Elena Rodriguez</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium</span>
+                                        <span class="detail-value">Oil on Linen</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Dimensions</span>
+                                        <span class="detail-value">60" × 40"</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year</span>
+                                        <span class="detail-value">2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="see-more-btn" data-target="landscape-extended-1">
+                            View Artwork Details
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Tab 4: Portrait Art -->
+        <div class="tab-content" id="portrait-tab">
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false">
+                <div class="item-image-container">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Portrait Art">
+                    </div>
+                </div>
+                <div class="item-content">
+                    <span class="item-category">Contemporary Portraiture</span>
+                    <h2 class="item-title">Quiet Reflection</h2>
+                    <p class="item-subtitle">A Study in Human Emotion</p>
+                    <p class="item-description">
+                        An intimate portrait capturing a moment of profound introspection.
+                    </p>
+                    
+                    <div class="item-extended-wrapper">
+                        <div class="item-extended" id="portrait-extended-1">
+                            <div class="extended-content">
+                                <p>Part of the artist's acclaimed "Silent Dialogues" series, this portrait examines the intersection of identity, memory, and contemporary existence.</p>
+                                <div class="art-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Artist</span>
+                                        <span class="detail-value">Marcus Chen</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium</span>
+                                        <span class="detail-value">Oil on Canvas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Dimensions</span>
+                                        <span class="detail-value">40" × 30"</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year</span>
+                                        <span class="detail-value">2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="see-more-btn" data-target="portrait-extended-1">
+                            View Artwork Details
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Tab 5: Sculpture -->
+        <div class="tab-content" id="sculpture-tab">
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false">
+                <div class="item-content">
+                    <span class="item-category">Modern Sculpture</span>
+                    <h2 class="item-title">Organic Forms</h2>
+                    <p class="item-subtitle">Nature's Geometry in Bronze</p>
+                    <p class="item-description">
+                        A sculptural exploration of natural forms rendered in timeless materials.
+                    </p>
+                    
+                    <div class="item-extended-wrapper">
+                        <div class="item-extended" id="sculpture-extended-1">
+                            <div class="extended-content">
+                                <p>Cast using the traditional lost-wax method with contemporary finishing techniques, this sculpture represents eight months of meticulous work.</p>
+                                <div class="art-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Artist</span>
+                                        <span class="detail-value">Aisha Patel</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium</span>
+                                        <span class="detail-value">Bronze & Marble</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Dimensions</span>
+                                        <span class="detail-value">24" × 18" × 12"</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year</span>
+                                        <span class="detail-value">2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="see-more-btn" data-target="sculpture-extended-1">
+                            View Artwork Details
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="item-image-container">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Modern Sculpture">
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Tab 6: Digital Art -->
+        <div class="tab-content" id="digital-tab">
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false">
+                <div class="item-image-container">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Digital Art">
+                    </div>
+                </div>
+                <div class="item-content">
+                    <span class="item-category">Digital Innovation</span>
+                    <h2 class="item-title">Digital Frontier</h2>
+                    <p class="item-subtitle">Code & Creativity Converge</p>
+                    <p class="item-description">
+                        Pushing the boundaries of artistic expression through algorithmic generation and digital manipulation.
+                    </p>
+                    
+                    <div class="item-extended-wrapper">
+                        <div class="item-extended" id="digital-extended-1">
+                            <div class="extended-content">
+                                <p>Created using custom generative algorithms and enhanced with augmented reality layers, this piece evolves when viewed through the companion mobile application.</p>
+                                <div class="art-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Artist</span>
+                                        <span class="detail-value">Digital Collective</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium</span>
+                                        <span class="detail-value">Digital Print & AR</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Dimensions</span>
+                                        <span class="detail-value">36" × 24"</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year</span>
+                                        <span class="detail-value">2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="see-more-btn" data-target="digital-extended-1">
+                            View Artwork Details
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Tab 7: Textile Art -->
+        <div class="tab-content" id="textile-tab">
+            <article class="gallery-item" data-aos="fade-up" data-aos-once="false">
+                <div class="item-content">
+                    <span class="item-category">Textile Art</span>
+                    <h2 class="item-title">Woven Stories</h2>
+                    <p class="item-subtitle">Fiber Narratives & Cultural Heritage</p>
+                    <p class="item-description">
+                        Revitalizing ancient textile techniques through contemporary design and narrative storytelling.
+                    </p>
+                    
+                    <div class="item-extended-wrapper">
+                        <div class="item-extended" id="textile-extended-1">
+                            <div class="extended-content">
+                                <p>Created in collaboration with master weavers from Rajasthan, this piece incorporates traditional ikat dyeing with contemporary design principles.</p>
+                                <div class="art-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Artist</span>
+                                        <span class="detail-value">Weave Collective</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Medium</span>
+                                        <span class="detail-value">Silk & Natural Dyes</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Dimensions</span>
+                                        <span class="detail-value">72" × 48"</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Year</span>
+                                        <span class="detail-value">2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="see-more-btn" data-target="textile-extended-1">
+                            View Artwork Details
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="item-image-container">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Textile Art">
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS with refined settings
+        AOS.init({
+            duration: 600,
+            easing: 'ease-out-cubic',
+            once: false,
+            mirror: true,
+            offset: 80,
+            delay: 0,
+            anchorPlacement: 'top-bottom',
+            disable: window.innerWidth < 768
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            AOS.refresh();
+        });
+        
+        // Simple Tab Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = button.getAttribute('data-tab');
+                    const tabContent = document.getElementById(`${tabId}-tab`);
+                    if (tabContent) {
+                        tabContent.classList.add('active');
+                    }
+                });
+            });
+            
+            // "See More" functionality
+            const seeMoreButtons = document.querySelectorAll('.see-more-btn');
+            
+            seeMoreButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const targetId = this.getAttribute('data-target');
+                    const targetElement = document.getElementById(targetId);
+                    const isExpanded = targetElement.classList.contains('expanded');
+                    
+                    if (isExpanded) {
+                        // Close this section
+                        targetElement.classList.remove('expanded');
+                        this.classList.remove('expanded');
+                        this.innerHTML = 'View Artwork Details <span class="btn-icon">▼</span>';
+                    } else {
+                        // Close other expanded sections first
+                        document.querySelectorAll('.item-extended.expanded').forEach(item => {
+                            item.classList.remove('expanded');
+                        });
+                        document.querySelectorAll('.see-more-btn.expanded').forEach(btn => {
+                            btn.classList.remove('expanded');
+                            btn.innerHTML = 'View Artwork Details <span class="btn-icon">▼</span>';
+                        });
+                        
+                        // Open this section
+                        targetElement.classList.add('expanded');
+                        this.classList.add('expanded');
+                        this.innerHTML = 'Show Less Details <span class="btn-icon">▲</span>';
+                    }
+                });
+            });
+            
+            // Close expanded sections when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.see-more-btn') && !event.target.closest('.item-extended')) {
+                    document.querySelectorAll('.item-extended.expanded').forEach(item => {
+                        item.classList.remove('expanded');
+                    });
+                    document.querySelectorAll('.see-more-btn.expanded').forEach(btn => {
+                        btn.classList.remove('expanded');
+                        btn.innerHTML = 'View Artwork Details <span class="btn-icon">▼</span>';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
