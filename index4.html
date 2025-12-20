@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Premium Artwork Gallery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+  background:#f3f3f3;
+  font-family: system-ui, sans-serif;
+}
+
+/* Masonry */
+.gallery{
+  column-count:6;
+  column-gap:16px;
+  padding:20px;
+}
+@media(max-width:1400px){.gallery{column-count:5}}
+@media(max-width:1200px){.gallery{column-count:4}}
+@media(max-width:992px){.gallery{column-count:3}}
+@media(max-width:576px){.gallery{column-count:2}}
+
+.art-card{
+  break-inside:avoid;
+  margin-bottom:16px;
+  border-radius:14px;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+  background:#000;
+}
+
+/* Image */
+.art-card img{
+  width:100%;
+  display:block;
+  transition:.5s ease;
+}
+
+/* Hover */
+.art-card:hover img{
+  transform:scale(1.04);
+  opacity:.9;
+}
+
+/* Hover info */
+.hover-info{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  opacity:0;
+  transition:.3s;
+  display:flex;
+  align-items:flex-end;
+}
+.art-card:hover .hover-info{
+  opacity:1;
+}
+.hover-info div{
+  color:#fff;
+  padding:12px;
+}
+
+/* Click overlay */
+.detail-layer{
+  position:absolute;
+  inset:0;
+  background:#FFF6D9;
+  opacity:0;
+  transform:translateY(20px);
+  pointer-events:none;
+  transition:.6s ease;
+}
+
+/* ACTIVE STATE (with lag feel) */
+.art-card.active img{
+  filter:blur(2px) brightness(.7);
+}
+.art-card.active .detail-layer{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+/* Detail content */
+.detail-content{
+  padding:18px;
+}
+.detail-content h5{
+  margin-bottom:4px;
+}
+.detail-content p{
+  font-size:14px;
+  color:#555;
+}
+</style>
+</head>
+
+<body>
+
+<section class="gallery">
+
+<!-- CARD -->
+<div class="art-card" onclick="openCard(this)">
+  <img src="https://picsum.photos/400/600?random=1">
+
+  <div class="hover-info">
+    <div>
+      <strong>Forest Path</strong><br>
+      <small>Photography</small>
+    </div>
+  </div>
+
+  <div class="detail-layer">
+    <div class="detail-content">
+      <h5>Forest Path</h5>
+      <small class="text-muted">A. Sharma · 2022 · Photography</small>
+      <p class="mt-2">
+        A calm journey through dense green forest, designed to
+        create peace, symmetry and visual balance.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- AUTO CARDS -->
+<script>
+for(let i=2;i<=28;i++){
+document.write(`
+<div class="art-card" onclick="openCard(this)">
+  <img src="https://picsum.photos/400/${420+i*6}?random=${i}">
+  <div class="hover-info">
+    <div>
+      <strong>Artwork ${i}</strong><br>
+      <small>Digital / Nature</small>
+    </div>
+  </div>
+  <div class="detail-layer">
+    <div class="detail-content">
+      <h5>Artwork ${i}</h5>
+      <small class="text-muted">Creative Artist · 2021</small>
+      <p class="mt-2">
+        A soothing minimal artwork crafted to relax the viewer
+        and enhance creative focus.
+      </p>
+    </div>
+  </div>
+</div>
+`);
+}
+</script>
+
+</section>
+
+<script>
+function openCard(card){
+  document.querySelectorAll('.art-card').forEach(c=>{
+    if(c!==card) c.classList.remove('active');
+  });
+
+  // lag feel
+  setTimeout(()=>{
+    card.classList.toggle('active');
+  },300);
+}
+</script>
+
+</body>
+</html>
