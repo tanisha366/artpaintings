@@ -1,4 +1,23 @@
 <section class="expand-gallery">
+  <!-- Preconnect to external image domains for faster loading -->
+  <link rel="preconnect" href="https://cdn11.bigcommerce.com">
+  <link rel="preconnect" href="https://m.media-amazon.com">
+  <link rel="preconnect" href="https://t3.ftcdn.net">
+  <link rel="preconnect" href="https://russell-collection.com">
+  <link rel="preconnect" href="https://thumbs.dreamstime.com">
+  <link rel="preconnect" href="https://artzest.org">
+  <link rel="preconnect" href="https://encrypted-tbn0.gstatic.com">
+  <link rel="preconnect" href="https://i.pinimg.com">
+  <link rel="preconnect" href="https://indianartideas.in">
+  <link rel="preconnect" href="https://cdn.britannica.com">
+  <link rel="preconnect" href="https://www.artzolo.com">
+  <link rel="preconnect" href="https://www.boredpanda.com">
+  <link rel="preconnect" href="https://i.ebayimg.com">
+  <link rel="preconnect" href="https://i.etsystatic.com">
+  <link rel="preconnect" href="https://images.stockcake.com">
+  <link rel="preconnect" href="https://www.shutterstock.com">
+  <link rel="preconnect" href="https://s3.ap-southeast-1.amazonaws.com">
+  
   <div class="gallery-header">
     <h2>Our Artwork Collection</h2>
     <p class="subtitle">Contemporary art from emerging and established artists</p>
@@ -7,7 +26,7 @@
   <div class="creative-grid">
     <article class="art-card card-1">
       <div class="card-image">
-        <img src="https://cdn11.bigcommerce.com/s-x49po/images/stencil/1500x1500/products/59766/277443/1603425445393_IMG-20201023-WA0011__44655.1687410349.jpg?c=2&imbypass=on" alt="Abstract Art" loading="lazy">
+        <img src="https://cdn11.bigcommerce.com/s-x49po/images/stencil/1500x1500/products/59766/277443/1603425445393_IMG-20201023-WA0011__44655.1687410349.jpg?c=2&imbypass=on" alt="Abstract Art" loading="eager" fetchpriority="high">
         <div class="gradient-overlay"></div>
         <div class="shine-effect"></div>
       </div>
@@ -28,7 +47,7 @@
     
     <article class="art-card card-2">
       <div class="card-image">
-        <img src="https://m.media-amazon.com/images/I/81CNao7Sf+L._AC_UF894,1000_QL80_.jpg" alt="Landscape Art" loading="lazy">
+        <img src="https://m.media-amazon.com/images/I/81CNao7Sf+L._AC_UF894,1000_QL80_.jpg" alt="Landscape Art" loading="eager" fetchpriority="high">
         <div class="gradient-overlay"></div>
         <div class="shine-effect"></div>
       </div>
@@ -49,7 +68,7 @@
     
     <article class="art-card card-3">
       <div class="card-image">
-        <img src="https://t3.ftcdn.net/jpg/04/01/05/94/360_F_401059468_VY3vWXbXW9sFuAIVP1yRSN6HZHHnnrN9.jpg" alt="Portrait Art" loading="lazy">
+        <img src="https://t3.ftcdn.net/jpg/04/01/05/94/360_F_401059468_VY3vWXbXW9sFuAIVP1yRSN6HZHHnnrN9.jpg" alt="Portrait Art" loading="eager" fetchpriority="high">
         <div class="gradient-overlay"></div>
         <div class="shine-effect"></div>
       </div>
@@ -70,7 +89,7 @@
     
     <article class="art-card card-4">
       <div class="card-image">
-        <img src="https://russell-collection.com/wp-content/uploads/2025/04/abstract-art-examples.jpg" alt="Urban Abstraction" loading="lazy">
+        <img src="https://russell-collection.com/wp-content/uploads/2025/04/abstract-art-examples.jpg" alt="Urban Abstraction" loading="eager">
         <div class="gradient-overlay"></div>
         <div class="shine-effect"></div>
       </div>
@@ -91,7 +110,7 @@
     
     <article class="art-card card-5">
       <div class="card-image">
-        <img src="https://thumbs.dreamstime.com/b/fluorite-oil-painting-conceptual-abstract-picture-eye-closeup-colorful-colors-palette-knife-canvas-201454369.jpg" alt="Conceptual Art" loading="lazy">
+        <img src="https://thumbs.dreamstime.com/b/fluorite-oil-painting-conceptual-abstract-picture-eye-closeup-colorful-colors-palette-knife-canvas-201454369.jpg" alt="Conceptual Art" loading="eager">
         <div class="gradient-overlay"></div>
         <div class="shine-effect"></div>
       </div>
@@ -112,7 +131,7 @@
     
     <article class="art-card card-6">
       <div class="card-image">
-        <img src="https://artzest.org/wp-content/uploads/2018/04/AnandPanchal_20x20inches_AcrylicOnCanvas2.jpg" alt="Figurative Art" loading="lazy">
+        <img src="https://artzest.org/wp-content/uploads/2018/04/AnandPanchal_20x20inches_AcrylicOnCanvas2.jpg" alt="Figurative Art" loading="eager">
         <div class="gradient-overlay"></div>
         <div class="shine-effect"></div>
       </div>
@@ -180,6 +199,19 @@ const cardImagePools = {
 ],
 };
 
+// Preload images in the background for faster switching
+function preloadImages() {
+  Object.values(cardImagePools).forEach(pool => {
+    pool.forEach(src => {
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = src;
+      link.as = 'image';
+      document.head.appendChild(link);
+    });
+  });
+}
+
 // Pick random image from pool
 function getRandomImage(pool) {
   return pool[Math.floor(Math.random() * pool.length)];
@@ -195,16 +227,30 @@ function loadRandomPaintings() {
     const imagePool = cardImagePools[cardKey];
     
     if (img && imagePool) {
-      img.loading = 'eager';
-      img.decoding = 'sync';
-      img.src = getRandomImage(imagePool);
+      const newSrc = getRandomImage(imagePool);
+      
+      // Create new image object for faster loading
+      const preloadImg = new Image();
+      preloadImg.onload = function() {
+        img.src = newSrc;
+      };
+      preloadImg.src = newSrc;
+      
       img.alt = `Traditional Painting - Card ${index + 1}`;
     }
   });
 }
 
-// IMMEDIATE EXECUTION - Zero delay
-loadRandomPaintings();
+// Execute immediately on DOM load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    loadRandomPaintings();
+    setTimeout(preloadImages, 1000); // Preload other images after initial load
+  });
+} else {
+  loadRandomPaintings();
+  setTimeout(preloadImages, 1000);
+}
 </script>
 
 <style>
